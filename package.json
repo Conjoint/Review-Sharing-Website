@@ -1,5 +1,5 @@
 {
-  "name": "foodnearme",
+  "name": "conjoint",
   "version": "1.0.0",
   "description": "An app that helps you find nearby food places and plan an itinerary.",
   "main": "server.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "Gaurang Shah",
+  "author": "conjoint",
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
