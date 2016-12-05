@@ -46,5 +46,5 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 
 
 app.listen(port, function(){
-    console.log("Go and Explore the places at http://localhost:" + port);
+    console.log("Conjoint at http://localhost:" + port);
 });

@@ -141,12 +141,12 @@ function upload_image() {
     });
     //console.log(file_path);
 }
-function category(){
+function abc(){
    // alert("xyz");
   var xyz = document.getElementById('category').value; 
   //alert(xyz);
   $.ajax({
-        url: '/category_type',
+        url: '/try',
         dataType: "json",
         data: {
             "category": xyz,
@@ -167,7 +167,7 @@ function city(){
   var temp = document.getElementById('txtPlaces').value;
   //alert(temp);
     $.ajax({
-        url: '/city_code',
+        url: '/try2',
         dataType: "json",
         data: {
             "txtPlaces": temp,

@@ -1,9 +1,13 @@
+//// VAR FOR IMAGE UPLOAD IN REVIEW ////////
+var multer = require('multer'),
+    file_name,
+    final_filepath;
 module.exports = function(app, passport) {
     var Yelp = require("yelp");
     var configAuth = require('../config/auth');
     var yelp = new Yelp(configAuth.yelp);
     var reviews = require('../app/models/review');
-    
+    var hangouts = require('../app/models/hangout');
 
     // normal routes ===============================================================
     // show the home page (will also have our login links)
@@ -110,7 +114,22 @@ module.exports = function(app, passport) {
             //console.log("revengee");
     });
 
-   
+    app.get('/findHangout', function(req, res) {
+        var cityName = req.query.cityName;
+        yelp.search({
+            term: y,
+            //bounds: swLat + "," + swLong + "|" + neLat + "," + neLong
+            location: 'san-fransico'
+        })
+            .then(function(data) {
+                res.json(data);
+                console.log(data);
+                console.log("End here..........");
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+    });
 
     app.post('/saveListToDb', function(req, res) {
         var plan = new hangouts({
@@ -193,10 +212,36 @@ module.exports = function(app, passport) {
     });
 
 
+/*app.get('/review', function(req, res) {
+        reviews.find({
+         $or: [
+         {user: 'montu'}, { restaurant: { $in: ['Grandview Park', 'Twin Peaks'] } }
+      ]
+        }, function(err, obj) {
+            if (err) {
+                res.json({
+                    "status": "not found"
+                });
+            } else {
+                res.json(obj);
+                console.log(obj);
+            }
+        });
+    });*/
 
+    app.post('/api/photo', function(req, res) {
+        upload(req, res, function(err) {
+            if (err) {
+                return res.end("Error uploading file.");
+            }
+            res.send(final_filepath);
+        });
+    });
 
 };
 
+
+// route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
@@ -204,5 +249,23 @@ function isLoggedIn(req, res, next) {
     res.redirect('/');
 }
 
+///////// IMAGE UPLOAD FUNCTIONS ///////
 
+var storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, './public/uploads');
 
+    },
+    filename: function(req, file, callback) {
+        var file_type = file.mimetype.split("/")[1];
+        file_name = file.fieldname + '-' + Date.now() + '.' + file_type;
+        callback(null, file_name);
+        final_filepath = "/uploads/" + file_name;
+    }
+});
+
+var upload = multer({
+    storage: storage
+}).single('userphoto');
+
+//////// IMAGE FUNCTIONS DONE //////////
