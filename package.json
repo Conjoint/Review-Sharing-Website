@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "conjointreview",
+=======
+  "name": "conjoint",
+>>>>>>> 3e1d36b5cbe1cfac96e7655d92f3d8ebaeabcbf0
   "version": "1.0.0",
   "description": "An app that helps you find nearby food places and plan an itinerary.",
   "main": "server.js",
@@ -7,7 +11,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+<<<<<<< HEAD
   "author": "conjointreview",
+=======
+  "author": "conjoint",
+>>>>>>> 3e1d36b5cbe1cfac96e7655d92f3d8ebaeabcbf0
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
