@@ -1,14 +1,6 @@
 var file_path,
     userCurrent;
-$(document).ready(function() {
-    $('.modal-trigger').leanModal({
-        dismissible: true, // Modal can be dismissed by clicking outside of the modal
-        opacity: 0.5, // Opacity of modal background
-        in_duration: 300, // Transition in duration
-        out_duration: 200
-    });
-    $('.button-collapse').sideNav();
-});
+
 
 var vm = {
     searchResults: ko.observableArray()
@@ -26,8 +18,6 @@ function getLocation() {
 
 function showPosition(position) {
     
-   /* myVar = document.getElementById('category').value; 
-    alert(myVar);*/
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
     var latlon = new google.maps.LatLng(lat, lon);
@@ -118,35 +108,12 @@ function showPosition(position) {
     });
 }
 
-function upload_image() {
-    var formdata = new FormData();
-    $.each($('#profile_file')[0].files, function(i, file) {
-        formdata.append('userphoto', file);
-    });
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/api/photo",
-        data: formdata,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(data) {
-            file_path = data;
-            console.log('Review Uploaded' + file_path);
-            console.log(file_path);
-        },
-        error: function(status) {
-            alert(status);
-        }
-    });
-    //console.log(file_path);
-}
-function abc(){
-   // alert("xyz");
+function select_category(){
+  
   var xyz = document.getElementById('category').value; 
-  //alert(xyz);
+  
   $.ajax({
-        url: '/try',
+        url: '/select_somecategory',
         dataType: "json",
         data: {
             "category": xyz,    
@@ -161,7 +128,7 @@ function city(){
   var temp = document.getElementById('txtPlaces').value;
   //alert(temp);
     $.ajax({
-        url: '/try2',
+        url: '/usercity',
         dataType: "json",
         data: {
             "txtPlaces": temp,
@@ -250,6 +217,6 @@ function clicked(item) {
     revealReview($(item).attr("id"));
 }
 
-$("#try").click(function(e) {
+$("#category_key").click(function(e) {
     getLocation();
 });

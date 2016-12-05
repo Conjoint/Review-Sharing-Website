@@ -1,13 +1,9 @@
-//// VAR FOR IMAGE UPLOAD IN REVIEW ////////
-var multer = require('multer'),
-    file_name,
-    final_filepath;
 module.exports = function(app, passport) {
     var Yelp = require("yelp");
     var configAuth = require('../config/auth');
     var yelp = new Yelp(configAuth.yelp);
     var reviews = require('../app/models/review');
-    var hangouts = require('../app/models/hangout');
+   
 
     // normal routes ===============================================================
     // show the home page (will also have our login links)
@@ -22,13 +18,7 @@ module.exports = function(app, passport) {
         });
     });
 
-    /*// PLAN TRIP SECTION =========================
-    app.get('/trip', isLoggedIn, function(req, res) {
-        res.render('trip.ejs', {
-            user: req.user
-        });
-    });*/
-
+    
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {
         req.logout();
@@ -69,26 +59,8 @@ module.exports = function(app, passport) {
         failureFlash: true // allow flash messages
     }));
 
-    // =============================================================================
-    // AUTHORIZE (ALREADY LOGGED IN / CONNECTING OTHER SOCIAL ACCOUNT) =============
-    // =============================================================================
-
-    // locally --------------------------------
-    /*app.get('/connect/local', function(req, res) {
-        res.render('connect-local.ejs', {
-            message: req.flash('loginMessage')
-        });
-    });
-    app.post('/connect/local', passport.authenticate('local-signup', {
-        successRedirect: '/profile', // redirect to the secure profile section
-        failureRedirect: '/connect/local', // redirect back to the signup page if there is an error
-        failureFlash: true // allow flash messages
-    }));*/
-
     app.get('/find', function(req, res) {
-       // var y = req.body.category;
-        //console.log("HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
-        //console.log(req.body.category);
+     
         console.log("Latitude = " + req.query.latitude);
         console.log("Longitude = " + req.query.longitude);
 
@@ -98,8 +70,8 @@ module.exports = function(app, passport) {
         var neLong = parseFloat(req.query.longitude) + 0.0075;
 
         yelp.search({
-            term: ww,
-            //bounds: swLat + "," + swLong + "|" + neLat + "," + neLong
+            term: userchoice,
+           
             location: city
         })
             .then(function(data) {
@@ -110,40 +82,12 @@ module.exports = function(app, passport) {
             .catch(function(err) {
                 console.log(err);
             });
-            //console.log(req.query.category);
-            //console.log("revengee");
+           
     });
 
-    app.get('/findHangout', function(req, res) {
-        var cityName = req.query.cityName;
-        yelp.search({
-            term: y,
-            //bounds: swLat + "," + swLong + "|" + neLat + "," + neLong
-            location: 'san-fransico'
-        })
-            .then(function(data) {
-                res.json(data);
-                console.log(data);
-                console.log("End here..........");
-            })
-            .catch(function(err) {
-                console.log(err);
-            });
-    });
+   
 
-    app.post('/saveListToDb', function(req, res) {
-        var plan = new hangouts({
-            user: req.body.user,
-            plans: req.body.hangoutList
-        });
-        plan.save(function(err, plan) {
-            if (err) {
-                return console.log(err);
-            }
-            console.log("Plan Saved");
-            res.json(plan);
-        });
-    });
+    
 
     app.post('/review', function(req, res) {
         var tempReview = new reviews({
@@ -167,20 +111,20 @@ module.exports = function(app, passport) {
     });
 
 
-     app.post('/try', function(req, res) {
+     app.post('/select_somecategory', function(req, res) {
        
            
-            var ww =  req.body.category;
-            global.ww = req.body.category;
+            var userchoice =  req.body.category;
+            global.userchoice = req.body.category;
           
        
-        console.log(ww);
+        console.log(userchoice);
 
         
     });
 
 
- app.post('/try2', function(req, res) {
+ app.post('/usercity', function(req, res) {
        //console.log("YEEEE");
            
             var city =  req.body.txtPlaces;
@@ -212,32 +156,6 @@ module.exports = function(app, passport) {
     });
 
 
-/*app.get('/review', function(req, res) {
-        reviews.find({
-         $or: [
-         {user: 'montu'}, { restaurant: { $in: ['Grandview Park', 'Twin Peaks'] } }
-      ]
-        }, function(err, obj) {
-            if (err) {
-                res.json({
-                    "status": "not found"
-                });
-            } else {
-                res.json(obj);
-                console.log(obj);
-            }
-        });
-    });*/
-
-    app.post('/api/photo', function(req, res) {
-        upload(req, res, function(err) {
-            if (err) {
-                return res.end("Error uploading file.");
-            }
-            res.send(final_filepath);
-        });
-    });
-
 };
 
 
@@ -249,23 +167,3 @@ function isLoggedIn(req, res, next) {
     res.redirect('/');
 }
 
-///////// IMAGE UPLOAD FUNCTIONS ///////
-
-var storage = multer.diskStorage({
-    destination: function(req, file, callback) {
-        callback(null, './public/uploads');
-
-    },
-    filename: function(req, file, callback) {
-        var file_type = file.mimetype.split("/")[1];
-        file_name = file.fieldname + '-' + Date.now() + '.' + file_type;
-        callback(null, file_name);
-        final_filepath = "/uploads/" + file_name;
-    }
-});
-
-var upload = multer({
-    storage: storage
-}).single('userphoto');
-
-//////// IMAGE FUNCTIONS DONE //////////

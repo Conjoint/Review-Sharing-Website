@@ -35,7 +35,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 app.use(session({
-    secret: 'thisiscodedbygs7'
+    secret: 'Conjoint'
 })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
