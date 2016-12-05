@@ -9,7 +9,6 @@ var reviewSchema = mongoose.Schema({
     restaurantID: String,
     date: String,
     user: String,
-    image: String
 });
 
 // create the model for users and expose it to our app

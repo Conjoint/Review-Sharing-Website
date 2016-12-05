@@ -12,14 +12,15 @@ var userSchema = mongoose.Schema({
     }
 });
 
-// generating a hash
+// generating a salt and hash using hashSync
 userSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    var hash = bcrypt.genSaltSync(10);
+    return bcrypt.hashSync(password, hash, null);
 };
 
-// checking if password is valid
+// password validation
 userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
+    return bcrypt.compareSync(password, this.local.password);//checking the entered password with the stored password
 };
 
 // create the model for users and expose it to our app
