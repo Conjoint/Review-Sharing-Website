@@ -67,7 +67,7 @@
                   <!--   <a id="findFood" class="btn-large waves-effect waves-blue orange">Upload Food Picture</a>
                     &nbsp;&nbsp;&nbsp; -->
                     <!-- <button style="background:red" id="findFood" class="btn waves-effect waves-light red">Set Location/see Results</button> -->
-                    <button onclick="abc();" style="background:red" id="try" class="btn waves-effect waves-light red">Set Category</button>
+                    <button onclick="abc();" style="background:red" id="try" class="btn waves-effect waves-light red">Set Location</button>
 
 
                     &nbsp;&nbsp;&nbsp;
@@ -88,7 +88,7 @@
                                 <p data-bind="text: $data.location.display_address[0]"></p>
                                 <p data-bind="text: $data.location.display_address[1]"></p>
                                 <h6 data-bind="text: $data.display_phone"></h6>
-                                <a data-bind="attr: {href: $data.newIDlink}" class="waves-effect waves-light btn-large red modal-trigger"><i class="material-icons right">speaker_notes</i>Check Reviews</a>
+                                <a data-bind="attr: {href: $data.newIDlink}" class="waves-effect waves-light btn-large orange lighten-2 modal-trigger"><i class="material-icons right">view_list</i>Check Reviews</a>
                                 
                                 <!-- Modal Structure -->
                                 <div data-bind="attr: {id: $data.newID}" class="modal bottom-sheet">
@@ -99,8 +99,9 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <a  data-bind="attr: {id: $data.phone}" onclick="clicked(this);" class="waves-effect waves-light btn-large light-blue lighten-1"><i class="material-icons right">thumbs_up_down</i>Post Reviews</a>
-                                
+                                <a  data-bind="attr: {id: $data.phone}" onclick="clicked(this);" class="waves-effect waves-light btn-large light-blue lighten-1"><i class="material-icons right">speaker_notes</i>Post Reviews</a>
+                                <a class="waves-effect waves-light btn-large green lighten-1"><i class="material-icons">thumb_up</i></a>
+                                <a class="waves-effect waves-light btn-large red lighten-1"><i class="material-icons">thumb_down</i></a>
                                 <!-- This section is hidden until user clicks Post Review -->
                                 <div data-bind="attr: {class: $data.phone}">
                                     <div class="row userReview">
@@ -114,7 +115,7 @@
                                             </div>
                                             <span style="display: none;">Upload Photo:</span>
                                             &nbsp;&nbsp;&nbsp;
-                                            <input class="waves-effect waves-light btn" style="display: none;" type="file" id="profile_file" name="userPhoto" />
+                                              <input class="waves-effect waves-light btn" style="display: none;" type="file" id="profile_file" name="userPhoto" />
                                             &nbsp;&nbsp;&nbsp;
                                             <button id="image_upload" style="display: none;" class="waves-effect waves-light btn" onclick="upload_image()">Upload</button>
                                             <div class="input-field col s12">
@@ -131,7 +132,9 @@
                                     </div>
                                 </div>
                                 <!-- End of Hidden Section -->
-                                
+                                <div class="progress" style="height:30px; width:72%">
+                                    <div class="determinate" style="width: 70%; background-color:#4caf50"></div>
+                                </div>
                                 <!-- <a class="secondary-content"><img data-bind="attr:{src: $data.rating_img_url_large}" alt=""></a> -->
                             </li>
                         </div>
