@@ -1,8 +1,8 @@
 module.exports = {
     yelp: {
-        "consumer_key": "s3gu-bz_UZutWssFUF9__A",
-        "consumer_secret": "AbufbsNUygX6nu2NV9m97VhnBms",
-        "token": "iwd171pcfzkoUB4reb7CYD6fDPsFG9CI",
-        "token_secret": "113LEtBcwCcKuCtD9m2U3Q9XrkA",
+        "consumer_key": "UfbcTxTlvYtS0a70Z33pKg",
+        "consumer_secret": "W6qkkZD7PCT5yoOQ8moVUGO1Gkw",
+        "token": "eDKlHAna5w0zqk58CikrrbkSp19qqtMq",
+        "token_secret": "9T9n95TR9X9MYWeiQLIWVfhzbuE",
     }
 };
