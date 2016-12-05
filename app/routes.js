@@ -22,12 +22,12 @@ module.exports = function(app, passport) {
         });
     });
 
-    // PLAN TRIP SECTION =========================
+    /*// PLAN TRIP SECTION =========================
     app.get('/trip', isLoggedIn, function(req, res) {
         res.render('trip.ejs', {
             user: req.user
         });
-    });
+    });*/
 
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {
@@ -74,7 +74,7 @@ module.exports = function(app, passport) {
     // =============================================================================
 
     // locally --------------------------------
-    app.get('/connect/local', function(req, res) {
+    /*app.get('/connect/local', function(req, res) {
         res.render('connect-local.ejs', {
             message: req.flash('loginMessage')
         });
@@ -83,7 +83,7 @@ module.exports = function(app, passport) {
         successRedirect: '/profile', // redirect to the secure profile section
         failureRedirect: '/connect/local', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
-    }));
+    }));*/
 
     app.get('/find', function(req, res) {
        // var y = req.body.category;

@@ -149,15 +149,9 @@ function abc(){
         url: '/try',
         dataType: "json",
         data: {
-            "category": xyz,
-            
+            "category": xyz,    
         },
         type: 'POST'
-/*        success: function(data) { 
-}
-error: function(xhr, status, error) {
-            
-        }*/
     });
   city();
 }
@@ -174,11 +168,6 @@ function city(){
             
         },
         type: 'POST'
-/*        success: function(data) { 
-}
-error: function(xhr, status, error) {
-            
-        }*/
     });
 }
 
@@ -246,7 +235,7 @@ function submitClicked(item) {
     } else if ($("." + $(item).attr("id") + " textarea").val() && $("." + $(item).attr("id") + " .select-dropdown").val() != "Select Rating") {
         submitReview($(item).attr("id"));
     } else {
-        $("." + $(item).attr("id") + " .submitResult").text("Please fill in all fieldskkkk!").removeClass("green-text").addClass("red-text");
+        $("." + $(item).attr("id") + " .submitResult").text("Please fill in all fields!").removeClass("green-text").addClass("red-text");
         $("." + $(item).attr("id") + " .submitResult").hide();
         $("." + $(item).attr("id") + " .submitResult").fadeIn();
     }

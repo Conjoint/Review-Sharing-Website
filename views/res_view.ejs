@@ -29,7 +29,7 @@
                 <ul class="right hide-on-med-and-down">
                     <li>
                         <% if (user.local.email) { %>
-                        Hi,<span id="userCurrent"><%= user.local.first_name %></span>
+                        Hi,<span id="userCurrent"><%= user.local.first_name %>&nbsp;<%= user.local.last_name %> </span>
                         <% } %>
                     </li>
                     <li>
@@ -40,13 +40,16 @@
                 <a href="#" data-activates="nav-mobile" class="button-collapse"></a>
             </div>
         </nav>
-        <select name="category" id="category">
+
+<!--Select Category from the drop down menu-->
+<select name="category" id="category">
 
 <option value="Grocery store">Grocery store</option>
 <option value="Active Life">Active Life</option>
 <option value="Night Life">Night Life</option>
 
 </select>
+       
         <div class="section no-pad-bot" id="index-banner">
             <div class="container">
                 <br><br>
@@ -58,15 +61,8 @@
 <span>Location:</span>
     <input type="text" id="txtPlaces" name ="txtPlaces" style="width: 250px" placeholder="Enter a location" />
                 </div>
-
-
-
-
 <br>
                 <div class="row center">
-                  <!--   <a id="findFood" class="btn-large waves-effect waves-blue orange">Upload Food Picture</a>
-                    &nbsp;&nbsp;&nbsp; -->
-                    <!-- <button style="background:red" id="findFood" class="btn waves-effect waves-light red">Set Location/see Results</button> -->
                     <button onclick="abc();" style="background:red" id="try" class="btn waves-effect waves-light red">Set Location</button>
 
 
@@ -83,7 +79,7 @@
                     <div data-bind="attr: {class: $data.name}">
                         <div data-bind="attr:{class: $data.id}">
                             <li class="collection-item avatar">
-                                <img data-bind="attr:{src: $data.image_url}" alt="" class="circle">
+                                <img data-bind="attr:{src: $data.image_url}" alt="image" class="circle">
                                 <span data-bind="text: $data.name" class="title placeName"></span>
                                 <p data-bind="text: $data.location.display_address[0]"></p>
                                 <p data-bind="text: $data.location.display_address[1]"></p>
@@ -135,7 +131,7 @@
                                 <div class="progress" style="height:30px; width:72%">
                                     <div class="determinate" style="width: 70%; background-color:#4caf50"></div>
                                 </div>
-                                <!-- <a class="secondary-content"><img data-bind="attr:{src: $data.rating_img_url_large}" alt=""></a> -->
+                                
                             </li>
                         </div>
                     </div>
