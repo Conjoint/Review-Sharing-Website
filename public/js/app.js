@@ -71,12 +71,15 @@ function showPosition(position) {
                     type: 'GET',
                     success: function(result) {
                         var index = 0;
-                        if (result[index]) {
+                        var temp = result.length;
+                        console.log("REVIEWS........................................"+temp);
+                        while (result[index]) {
+
                             //console.log(JSON.stringify(result));
 
                             //At this point, result=all the reviews for the current business
 
-                            while (result[index]) {
+                                //if (result[index]) {
                                 $("div." + result[index].restaurantID + " .collection").append($("<li>").addClass("collection-item avatar " + index));
                                 $("div." + result[index].restaurantID + " .collection-item ." + index).append($("<i>supervisor_account</i>").addClass("material-icons circle light-blue lighten-1"));
                                 $("div." + result[index].restaurantID + " .collection-item ." + index).append($("<span>").addClass("title").text(result[index].user + " - " + result[index].date));
@@ -86,8 +89,9 @@ function showPosition(position) {
                                 /*for (var i = 0; i < result[index].rating; i++) {
                                     $("." + result[index].restaurantID + " .collection-item ." + index + " .secondary-content").append($("<i>grade</i>").addClass("material-icons"));
                                 }*/
-                                index++;
-                            }
+                                
+                            //}
+                            index++;
                         }
                     },
                     error: function(status) {
@@ -141,8 +145,8 @@ function city(){
 function submitReview(dataID) {
     //Preparing variables to post '/review' and store in mongoDB
     userCurrent = $('#userCurrent').text();
-    var starRating = $("." + dataID + " :selected").val();
-    starRating = Number(starRating);
+    //var starRating = $("." + dataID + " :selected").val();
+    //starRating = Number(starRating);
     var writtenReview = $("." + dataID + " textarea").val();
     var restaurantName = $("." + dataID + " .placeName").text();
     var today = new Date();
@@ -156,17 +160,15 @@ function submitReview(dataID) {
         dataType: "json",
         data: {
             "restaurant": restaurantName,
-            "rating": starRating,
             "written": writtenReview,
             "restaurantID": dataID,
             "date": tempDate,
             "user": userCurrent,
-            "image": file_path
         },
         type: 'POST',
         success: function(data) {
             //Hide review form after clicking submit
-            $("." + dataID + " .select-dropdown").val("Select Rating");
+            //$("." + dataID + " .select-dropdown").val("Select Rating");
             $("." + dataID + " textarea").val("");
             $("." + dataID + " .userReview").hide();
             $("." + dataID + " .submitResult").text("Review successfully submitted!").removeClass("red-text").addClass("green-text");
@@ -199,13 +201,13 @@ function submitClicked(item) {
         $("." + $(item).attr("id") + " .submitResult").text("Reviews can only be 300 characters long.").removeClass("green-text").addClass("red-text");
         $("." + $(item).attr("id") + " .submitResult").hide();
         $("." + $(item).attr("id") + " .submitResult").fadeIn();
-    } else if ($("." + $(item).attr("id") + " textarea").val() && $("." + $(item).attr("id") + " .select-dropdown").val() != "Select Rating") {
+    } /*else if ($("." + $(item).attr("id") + " textarea").val() && $("." + $(item).attr("id") + " .select-dropdown").val() != "Select Rating") {
         submitReview($(item).attr("id"));
     } else {
         $("." + $(item).attr("id") + " .submitResult").text("Please fill in all fields!").removeClass("green-text").addClass("red-text");
         $("." + $(item).attr("id") + " .submitResult").hide();
         $("." + $(item).attr("id") + " .submitResult").fadeIn();
-    }
+    }*/
 }
 
 function revealReview(phone) {

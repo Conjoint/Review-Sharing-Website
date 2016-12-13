@@ -3,6 +3,7 @@ module.exports = function(app, passport) {
     var configAuth = require('../config/auth');
     var yelp = new Yelp(configAuth.yelp);
     var reviews = require('../app/models/review');
+    var flash = require('connect-flash');
    
 
     // normal routes ===============================================================
